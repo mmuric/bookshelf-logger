@@ -2,16 +2,16 @@
 name = "bookshelf-logger"
 version = "0.1.0"
 edition = "2021"
+exclude = ["index.node"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 chrono = "0.4"
 serde_json = "1.0"
+neon = "1"
 
 [lib]
 crate-type = ["cdylib"]
 name="bookshelflogger"
 
-[dependencies.neon]
-features = ["napi-6"]
