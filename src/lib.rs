@@ -1,5 +1,6 @@
 use chrono::prelude::*;
 use neon::prelude::*;
+use pyo3::prelude::*;
 
 pub fn print_log_entry(uuid: &str, msrv: &str, comment: &str, payload: &serde_json::Value) {
     let current_time = Local::now();
@@ -34,3 +35,22 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
     Ok(())
 }
 
+
+#[pyfunction]
+#[pyo3(name="print_log_entry")]
+fn print_log_entry_py(uuid: &str, msrv: &str, comment: &str, payload: &str) -> PyResult<()> {
+    print_log_entry(
+        uuid,
+        msrv,
+        comment,
+        &payload.parse::<serde_json::Value>().unwrap(),
+    );
+    Ok(())
+}
+
+#[pymodule]
+#[pyo3(name="bookshelflogger")]
+fn string_sum(_py: Python<'_>, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(print_log_entry_py, m)?)?;
+    Ok(())
+}

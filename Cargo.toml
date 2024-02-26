@@ -1,5 +1,5 @@
 [package]
-name = "bookshelf-logger"
+name = "bookshelflogger"
 version = "0.1.0"
 edition = "2021"
 exclude = ["index.node"]
@@ -10,8 +10,8 @@ exclude = ["index.node"]
 chrono = "0.4"
 serde_json = "1.0"
 neon = "1"
+pyo3 = { version = "0.20.3", features = ["extension-module"] }
 
 [lib]
 crate-type = ["cdylib"]
-name="bookshelflogger"
-
+name = "bookshelflogger"
